@@ -1,0 +1,52 @@
+﻿@model IEnumerable<StoreManagement_core.ViewModels.ItemOutOfStockViewModel>
+
+@{
+    ViewData["Title"] = "Product Stock Report";
+}
+
+<h1>Stocks to be Replenished</h1>
+<h3>List of Items that are low in supply that need purchase</h3>
+
+@using (Html.BeginForm())
+{
+    @Html.DropDownList("SortData", new List<SelectListItem>
+    {
+       new SelectListItem{ Text="ItemName", Value = "ProductName" },
+       new SelectListItem{ Text="High-Low", Value = "hightolow" },
+       new SelectListItem{ Text="Date", Value = "date" }
+    }, "Select Sort Order")
+
+    <input type="submit" value="Submit" />
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StockedDate)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StockedDate)
+                    
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

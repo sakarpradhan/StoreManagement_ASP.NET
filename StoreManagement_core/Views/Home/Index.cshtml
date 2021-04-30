@@ -1,0 +1,78 @@
+﻿@model IEnumerable<StoreManagement_core.ViewModels.StockAlertViewModel>
+@{
+    ViewData["Title"] = "Home Page";
+}
+<script>
+    function Hide(HideID) {
+        HideID.style.display = "none";
+    }
+</script>
+<style>
+    .ShowHide {
+        color: black;
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+
+    #left {
+        overflow: hidden;
+        text-align: center;
+    }
+
+    #right {
+        color: white;
+        background-color: red;
+        float: right;
+        width: 30px;
+        height: 20px;
+        text-align: center;
+    }
+
+    .ShowHide a {
+        color: #FFFFFF;
+        text-decoration: none;
+    }
+
+        .ShowHide a:hover {
+            text-decoration: underline;
+        }
+</style>
+
+
+
+<div class="card ShowHide" id="Bar">
+    <div class="card-header">
+        <div id="right">
+            <a href="#" onclick="Hide(Bar);">❌</a>
+        </div>
+        <h3>List of Stocks running short</h3>
+    </div>
+    <div class="card-body" id="left">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ProductName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Quantity)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProductName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Quantity)
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

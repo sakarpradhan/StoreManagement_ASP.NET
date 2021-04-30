@@ -1,0 +1,34 @@
+﻿@model IEnumerable<StoreManagement_core.ViewModels.CustomersLastMonthViewModel>
+
+@{
+    ViewData["Title"] = "Cheap Customers List";
+}
+
+@{var a = Model.AsEnumerable().ToList();}
+
+<h2>Cheap Customers</h2>
+<h3>Who Have Not Bought for more than a Month</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CustName)
+            </th>
+            <th>@Html.DisplayNameFor(model => model.SalesDate)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SalesDate)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

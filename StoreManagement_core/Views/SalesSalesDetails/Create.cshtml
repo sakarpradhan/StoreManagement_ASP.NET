@@ -1,0 +1,152 @@
+﻿@model StoreManagement_core.ViewModels.SalesSalesDetailViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="flex-column">
+    <div class="col-md-12">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="card mt-2 mb-2">
+                <div class="card-header">
+                    <h1>Sales</h1>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Customer</th>
+                                <th>Bill #</th>
+                                <th>Sales Date</th>
+                                <th>Remarks</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><select asp-for="CustId" class="form-control" asp-items="ViewBag.CustId"></select></td>
+                                <td>
+                                    <input asp-for="BillNo" class="form-control" />
+                                    <span asp-validation-for="BillNo" class="text-danger"></span>
+                                </td>
+                                <td>
+                                    <input asp-for="SalesDate" class="form-control" />
+                                    <span asp-validation-for="SalesDate" class="text-danger"></span>
+                                </td>
+                                <td>
+                                    <input asp-for="Remarks" class="form-control" />
+                                    <span asp-validation-for="Remarks" class="text-danger"></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <hr />
+            <div class="card mt-2 mb-2">
+                <div class="card-header">
+                    <div class="row gx-5">
+                        <div class="col">
+                            <h2>Sales Details</h2>
+                        </div>
+                        <div class="col">
+                            <a style="float:right" class="btn btn-primary add-record" data-added="0">
+                                ➕ Add Row
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered" id="tbl_posts">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Quantity</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbl_posts_body">
+                            <tr id="rec-1">
+                                <td><select asp-for="ProdId" class="form-control" asp-items="ViewBag.ProdId"></select></td>
+                                <td>
+                                    <input asp-for="Quantity" class="form-control" />
+                                    <span asp-validation-for="Quantity" class="text-danger"></span>
+                                </td>
+                                <td>
+                                    <input asp-for="Amount" class="form-control" />
+                                    <span asp-validation-for="Amount" class="text-danger"></span>
+                                </td>
+                                
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+
+            <div style="display:none;">
+                <table id="sample_table">
+                    <tr id="">
+                        <td><select asp-for="ProdId" class="form-control" asp-items="ViewBag.ProdId"></select></td>
+                        <td>
+                            <input asp-for="Quantity" class="form-control" />
+                            <span asp-validation-for="Quantity" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <input asp-for="Amount" class="form-control" />
+                            <span asp-validation-for="Amount" class="text-danger"></span>
+                        </td>
+                        <td><a class="btn btn-xs delete-record" data-id="0">🗑️</a></td>
+                    </tr>
+                </table>
+            </div>
+
+
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript">
+    jQuery(document).delegate('a.add-record', 'click', function (e) {
+        e.preventDefault();
+        var content = jQuery('#sample_table tr'),
+            size = jQuery('#tbl_posts >tbody >tr').length + 1,
+            element = null,
+            element = content.clone();
+        element.attr('id', 'rec-' + size);
+        element.find('.delete-record').attr('data-id', size);
+        element.appendTo('#tbl_posts_body');
+        element.find('.sn').html(size);
+    });
+
+    jQuery(document).delegate('a.delete-record', 'click', function (e) {
+        e.preventDefault();
+        var didConfirm = confirm("Are you sure You want to delete");
+        if (didConfirm == true) {
+            var id = jQuery(this).attr('data-id');
+            var targetDiv = jQuery(this).attr('targetDiv');
+            jQuery('#rec-' + id).remove();
+
+            //regnerate index number on table
+            $('#tbl_posts_body tr').each(function (index) {
+                //alert(index);
+                $(this).find('span.sn').html(index + 1);
+            });
+            return true;
+        } else {
+            return false;
+        }
+    });
+
+</script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

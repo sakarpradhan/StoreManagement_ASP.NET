@@ -1,0 +1,34 @@
+﻿@model IEnumerable<StoreManagement_core.ViewModels.UnsoldStockViewModel>
+
+@{
+    ViewData["Title"] = "Unsold Stock List";
+}
+
+@{var a = Model.AsEnumerable().ToList();}
+
+<h1>Unsold Products</h1>
+<h3>These Products are unsold for atleast a month</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProdName)
+            </th>
+            <th>@*@Html.DisplayNameFor(model => model.SalesDate)*@</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProdName)
+                </td>
+                <td>
+                    @*@Html.DisplayFor(modelItem => item.SalesDate)*@
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

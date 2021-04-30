@@ -1,0 +1,56 @@
+﻿@model IEnumerable<StoreManagement_core.ViewModels.CustomerPurchaseHistoryViewModel>
+
+@{
+    ViewData["Title"] = "Customer Purchase History";
+}
+
+<h1>Customer Purchase History</h1>
+<h3>List of Purchase Records of User in past month</h3>
+
+@using (Html.BeginForm())
+{
+    <p>
+        Search by Name: @Html.TextBox("SearchBy")
+
+        <input type="submit" value="Search" />
+    </p>
+}
+
+@using (Html.BeginForm())
+{
+    <p>
+        Select by Available:
+        <select name="SearchBy">
+            @foreach (var item in ViewData["CustomerNames"] as List<String>)
+            {
+                <option value=@item>@item</option>
+            }
+        </select>
+
+        <input type="submit" value="Show" />
+    </p>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.ProdName)</th>
+            <th>@Html.DisplayNameFor(model => model.Quantity)</th>
+            <th>@Html.DisplayNameFor(model => model.Amount)</th>
+            <th>@Html.DisplayNameFor(model => model.BillNo)</th>
+            <th>@Html.DisplayNameFor(model => model.SalesDate)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.ProdName)</td>
+            <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+            <td>@Html.DisplayFor(modelItem => item.Amount)</td>
+            <td>@Html.DisplayFor(modelItem => item.BillNo)</td>
+            <td>@Html.DisplayFor(modelItem => item.SalesDate)</td>
+        </tr>
+        }
+    </tbody>
+</table>

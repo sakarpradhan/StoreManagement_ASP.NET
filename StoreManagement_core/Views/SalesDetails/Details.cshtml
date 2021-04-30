@@ -1,0 +1,42 @@
+﻿@model StoreManagement_core.Models.SalesDetail
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>SalesDetail</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Sale)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Sale.BillNo)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Prod)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Prod.ProdName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Amount)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Amount)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.SalesDetailId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

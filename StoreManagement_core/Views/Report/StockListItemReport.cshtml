@@ -1,0 +1,46 @@
+﻿@model IEnumerable<StoreManagement_core.ViewModels.ProductStockViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Details of Stock Available By Search</h1>
+
+
+@using (Html.BeginForm())
+{
+    <p>
+        Find by name: @Html.TextBox("SearchBy")
+        <input type="submit" value="SearchBy" />
+    </p>
+
+}
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProdName)
+            </th>
+            <th>@Html.DisplayNameFor(model => model.Quantity)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProdName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    <a href="/Products/Details/@item.ProdId">View Detail</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

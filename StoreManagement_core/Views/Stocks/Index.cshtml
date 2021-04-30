@@ -1,0 +1,47 @@
+﻿@model IEnumerable<StoreManagement_core.Models.Stock>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Available Stock</h1>
+<h2>List of Available Products</h2>
+<h4>Transaction done on Products are automatically reflected here</h4>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.StockId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Prod)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StockedDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StockId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Prod.ProdName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StockedDate)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

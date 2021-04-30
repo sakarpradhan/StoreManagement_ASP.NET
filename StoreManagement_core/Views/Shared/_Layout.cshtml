@@ -1,0 +1,390 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] Stock Management System</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="~/assets/css/main.css" />
+</head>
+<body class="is-preload">
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <img src="~/images/stockManagementCircle.png" height="100" width="100" asp-controller="Home" asp-action="Index" />
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <partial name="_LoginPartial" />
+                    <ul class="navbar-nav flex-grow-1">
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Product
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" asp-action="Index" asp-controller="Products">Products</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" asp-action="Index" asp-controller="Categories">Categories</a>
+                            </div>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Purchase
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" asp-action="Index" asp-controller="Purchases">Purchases</a>
+                                <a class="dropdown-item" asp-action="Index" asp-controller="PurchaseDetails">Purchase Details</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" asp-action="Create" asp-controller="PurchasePurchaseDetails">Purchase with Purchase Details</a>
+                            </div>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Customer
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" asp-action="Index" asp-controller="Customers">Customers</a>
+                                <a class="dropdown-item" asp-action="Index" asp-controller="Memberships">Membership Type</a>
+                            </div>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Sales
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" asp-action="Index" asp-controller="Sales">Sales</a>
+                                <a class="dropdown-item" asp-action="Index" asp-controller="SalesDetails">Sales Details</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" asp-action="Create" asp-controller="SalesSalesDetails">Sales with Sales Details</a>
+                            </div>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Reports
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" asp-action="StockListReport" asp-controller="Report">Q5 Stock List Report</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" asp-action="StockListSearchReport" asp-controller="Report">Q5 Stock List Search Report</a>
+                                <a class="dropdown-item" asp-action="StockListItemReport" asp-controller="Report">Q6 Stock List Item Details Report</a>
+                                <a class="dropdown-item" asp-action="CustomerPurchaseHistoryReport" asp-controller="Report">Q8 Customer Purchase History Report</a>
+                                <a class="dropdown-item" asp-action="Index" asp-controller="RemoveOldStocks">Q10 Remove Old Unsold Stock</a>
+                                <a class="dropdown-item" asp-action="ItemOutOfStockReport" asp-controller="Report">Q11 Items out of Stock Report</a>
+                                <a class="dropdown-item" asp-action="CustomerLastMonthReport" asp-controller="Report">Q12 Customer Who Not Purchase Last Month Report</a>
+                                <a class="dropdown-item" asp-action="UnsoldStockReport" asp-controller="Report">Q13 Unsold Stock Report</a>
+                            </div>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Stock
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" asp-action="Index" asp-controller="Stocks">Stock</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Role" asp-action="Index">Role</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <!-- Wrapper -->
+    <div id="wrapper">
+
+        <!-- Main -->
+        <div id="main">
+            <div class="inner">
+
+                <!-- Header -->
+                <header id="header">
+                    <a href="index.html" class="logo"><strong>Store Management</strong> System</a>
+                    <ul class="icons">
+                        <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+                        <li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+                        <li><a href="#" class="icon brands fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
+                        <li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+                        <li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>
+                    </ul>
+                </header>
+
+                <!-- Banner -->
+                <section id="banner">
+                    <div class="content">
+                        <header>
+                            <h1>
+                                Welcome,<br />
+                                Clutch Store
+                            </h1>
+                            <p>Browse | Manage | Analyse</p>
+                        </header>
+                        <p> We're no strangers to love
+                            You know the rules and so do I
+                            A full commitment's what I'm thinking of
+                            You wouldn't get this from any other guy
+                            I just wanna tell you how I'm feeling
+                            Gotta make you understand
+                            Never gonna give you up
+                            Never gonna let you down
+                            Never gonna run around and desert you
+                            Never gonna make you cry
+                            Never gonna say goodbye
+                            Never gonna tell a lie and hurt you
+                            We've known each other for so long
+                            Your heart's been aching but you're too shy to say it
+                            Inside we both know what's been going on
+                            We know the game and we're gonna play it
+                            And if you ask me how I'm feeling
+                            Don't tell me you're too blind to see
+                            Never gonna give you up
+                            Never gonna let you down
+                            Never gonna run around and desert you
+                            Never gonna make you cry
+                        </p>
+                        <ul class="actions">
+                            <li><a href="#" class="button big">Learn More</a></li>
+                        </ul>
+                    </div>
+                    <span class="image object">
+                        <img src="~/images/StockManagement2.png"  alt="" />
+                    </span>
+                </section>
+
+                <!-- Section -->
+                <section>
+                    <header class="major">
+                        <h2>Erat lacinia</h2>
+                    </header>
+                    <div class="features">
+                        <article>
+                            <span class="icon fa-gem"></span>
+                            <div class="content">
+                                <h3>Portitor ullamcorper</h3>
+                                <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+                            </div>
+                        </article>
+                        <article>
+                            <span class="icon solid fa-paper-plane"></span>
+                            <div class="content">
+                                <h3>Sapien veroeros</h3>
+                                <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+                            </div>
+                        </article>
+                        <article>
+                            <span class="icon solid fa-rocket"></span>
+                            <div class="content">
+                                <h3>Quam lorem ipsum</h3>
+                                <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+                            </div>
+                        </article>
+                        <article>
+                            <span class="icon solid fa-signal"></span>
+                            <div class="content">
+                                <h3>Sed magna finibus</h3>
+                                <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <!-- Section -->
+                <section>
+                    <header class="major">
+                        <h2>Ipsum sed dolor</h2>
+                    </header>
+                    <div class="posts">
+                        <article>
+                            <a href="#" class="image"><img src="images/pic01.jpg" alt="" /></a>
+                            <h3>Interdum aenean</h3>
+                            <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+                            <ul class="actions">
+                                <li><a href="#" class="button">More</a></li>
+                            </ul>
+                        </article>
+                        <article>
+                            <a href="#" class="image"><img src="images/pic02.jpg" alt="" /></a>
+                            <h3>Nulla amet dolore</h3>
+                            <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+                            <ul class="actions">
+                                <li><a href="#" class="button">More</a></li>
+                            </ul>
+                        </article>
+                        <article>
+                            <a href="#" class="image"><img src="images/pic03.jpg" alt="" /></a>
+                            <h3>Tempus ullamcorper</h3>
+                            <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+                            <ul class="actions">
+                                <li><a href="#" class="button">More</a></li>
+                            </ul>
+                        </article>
+                        <article>
+                            <a href="#" class="image"><img src="images/pic04.jpg" alt="" /></a>
+                            <h3>Sed etiam facilis</h3>
+                            <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+                            <ul class="actions">
+                                <li><a href="#" class="button">More</a></li>
+                            </ul>
+                        </article>
+                        <article>
+                            <a href="#" class="image"><img src="images/pic05.jpg" alt="" /></a>
+                            <h3>Feugiat lorem aenean</h3>
+                            <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+                            <ul class="actions">
+                                <li><a href="#" class="button">More</a></li>
+                            </ul>
+                        </article>
+                        <article>
+                            <a href="#" class="image"><img src="images/pic06.jpg" alt="" /></a>
+                            <h3>Amet varius aliquam</h3>
+                            <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+                            <ul class="actions">
+                                <li><a href="#" class="button">More</a></li>
+                            </ul>
+                        </article>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div id="sidebar">
+            <div class="inner">
+                <!-- Menu -->
+                <nav id="menu">
+                    <header class="major">
+                        <h2>Menu</h2>
+                    </header>
+                    <ul>
+
+                        <li><a class="dropdown-item" asp-action="Index" asp-controller="Stocks">Stock</a></li>
+                        <li>
+                            <span class="opener">Reports</span>
+                            <ul>
+                                <li><a class="dropdown-item" asp-action="StockListReport" asp-controller="Report">Q5 Stock List Report</a></li>
+                                <li><a class="dropdown-item" asp-action="StockListSearchReport" asp-controller="Report">Q5 Stock List Search Report</a></li>
+                                <li><a class="dropdown-item" asp-action="StockListItemReport" asp-controller="Report">Q6 Stock List Item Details Report</a></li>
+                                <li><a class="dropdown-item" asp-action="CustomerPurchaseHistoryReport" asp-controller="Report">Q8 Customer Purchase History Report</a></li>
+                                <li><a class="dropdown-item" asp-action="Index" asp-controller="RemoveOldStocks">Q10 Remove Old Unsold Stock</a></li>
+                                <li><a class="dropdown-item" asp-action="ItemOutOfStockReport" asp-controller="Report">Q11 Items out of Stock Report</a></li>
+                                <li><a class="dropdown-item" asp-action="CustomerLastMonthReport" asp-controller="Report">Q12 Cheap Customer</a></li>
+                                <li><a class="dropdown-item" asp-action="UnsoldStockReport" asp-controller="Report">Q13 Unsold Stock Report</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <span class="opener">Products | Categories</span>
+                            <ul>
+                                <li><a class="dropdown-item" asp-action="Index" asp-controller="Products">Products</a></li>
+                                <li><a class="dropdown-item" asp-action="Index" asp-controller="Categories">Categories</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <span class="opener">Purchase</span>
+                            <ul>
+                                <li><a class="dropdown-item" asp-action="Index" asp-controller="Purchases">Purchase</a></li>
+                                <li><a class="dropdown-item" asp-action="Index" asp-controller="PurchaseDetails">Purchase Details</a></li>
+                                <li><a class="dropdown-item" asp-action="Create" asp-controller="PurchasePurchaseDetails">Purchase with Purchase Details</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <span class="opener">Customers | Membership</span>
+                            <ul>
+                                <li><a class="dropdown-item" asp-action="Index" asp-controller="Customers">Customers</a></li>
+                                <li><a class="dropdown-item" asp-action="Index" asp-controller="Memberships">Membership</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <span class="opener">Sales</span>
+                            <ul>
+                                <li><a class="dropdown-item" asp-action="Index" asp-controller="Sales">Sales</a></li>
+                                <li><a class="dropdown-item" asp-action="Index" asp-controller="SalesDetails">Sales Details</a></li>
+                                <li><a class="dropdown-item" asp-action="Create" asp-controller="SalesSalesDetails">Sales with Sales Details</a></li>
+                            </ul>
+                        </li>
+
+
+
+
+                    </ul>
+                </nav>
+
+                <!-- Section -->
+                <section>
+                    <header class="major">
+                        <h2>Ante interdum</h2>
+                    </header>
+                    <div class="mini-posts">
+                        <article>
+                            <a href="#" class="image"><img src="~/images/pic07.jpg" alt="" /></a>
+                            <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
+                        </article>
+                        <article>
+                            <a href="#" class="image"><img src="~/images/pic08.jpg" alt="" /></a>
+                            <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
+                        </article>
+                        <article>
+                            <a href="#" class="image"><img src="~/images/pic09.jpg" alt="" /></a>
+                            <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
+                        </article>
+                    </div>
+                    <ul class="actions">
+                        <li><a href="#" class="button">More</a></li>
+                    </ul>
+                </section>
+
+                <!-- Section -->
+                <section>
+                    <header class="major">
+                        <h2>Get in touch</h2>
+                    </header>
+                    <p>Sed varius enim lorem ullamcorper dolore aliquam aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin sed aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+                    <ul class="contact">
+                        <li class="icon solid fa-envelope"><a href="#">information@untitled.tld</a></li>
+                        <li class="icon solid fa-phone">(000) 000-0000</li>
+                        <li class="icon solid fa-home">
+                            1234 Somewhere Road #8254<br />
+                            Nashville, TN 00000-0000
+                        </li>
+                    </ul>
+                </section>
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <!-- Scripts -->
+    <script src="~/assets/js/browser.min.js"></script>
+    <script src="~/assets/js/breakpoints.min.js"></script>
+    <script src="~/assets/js/util.js"></script>
+    <script src="~/assets/js/main.js"></script>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
